@@ -1,0 +1,7 @@
+$PROMPT = '{BOLD_GREEN}[ {short_cwd} ]\n$ '
+$RIGHT_PROMPT = "{branch_color} {gitstatus}"
+
+from math import *
+from itertools import *
+from functools import *
+from collections import *
