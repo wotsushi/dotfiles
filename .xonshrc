@@ -1,7 +1,84 @@
-$PROMPT = '{BOLD_GREEN}[ {short_cwd} ]\n$ '
+$PROMPT = '{BOLD_GREEN}[ {cwd} ]\n$ '
 $RIGHT_PROMPT = "{branch_color} {gitstatus}"
+$AUTO_PUSHD = True
+$AUTO_CD = True
+$DIRSTACK_SIZE = 100
+
+$PYENV_ROOT = '~/.anyenv/envs/pyenv'
+$PATH = [
+    '$PYENV_ROOT/shims',
+    '$PYENV_ROOT/bin',
+    # '$HOME/.cargo/bin',
+    '/home/linuxbrew/.linuxbrew/bin',
+    '/usr/local/bin',
+    '/usr/bin',
+    '/bin',
+    '/sbin'
+]
+
+from prompt_toolkit.keys import Keys
+from prompt_toolkit.filters import Condition, EmacsInsertMode, ViInsertMode
+
+
+@events.on_ptk_create
+def custom_keybindings(bindings, **kw):
+    handler = bindings.add
+
+    @handler(Keys.ControlX, Keys.ControlF)
+    def pemacs(event):
+        file = $(fd -H -t f| peco).strip()
+        if file:
+            emacs @(file)
+        event.cli.renderer.erase()
+
+    @handler(Keys.ControlR)
+    def phistory(event):
+        all_history = list(dict.fromkeys(reversed([
+            command['inp']
+            for command in __xonsh__.history.all_items()
+        ])))
+        command = $(echo @('\n'.join(all_history)) | peco).strip()
+        if command:
+            event.current_buffer.insert_text(command)
+        else:
+            event.cli.renderer.erase()
+
+    @handler(Keys.ControlX, Keys.ControlJ)
+    def cdhistory(event):
+        cd_history = list(dict.fromkeys($(dirs -p).split('\n')))
+        dest = $(echo @('\n'.join(cd_history)) | peco).strip()
+        if dest:
+            cd @(dest)
+        event.cli.renderer.erase()
+
+def _peco_gitlog():
+    commit_line = $(git log --oneline | peco)
+    if commit_line:
+        commit, *_ = commit_line.split()
+        git show @(commit)
+
+
+def _peco_rg(args):
+    rg_line = $(rg @(args) | peco)
+    if rg_line:
+        file, *_ = rg_line.split(':', maxsplit=1)
+        bat @(file)
+
+
+def _peco_ghq():
+    repository = $(ghq list -p | peco).strip()
+    if repository:
+        cd @(repository)
+
+
+aliases['gitlog'] = _peco_gitlog
+aliases['rgp'] = _peco_rg
+aliases['l'] = "exa -hla --git"
+aliases['ls'] = "exa"
+aliases['lg'] = _peco_ghq
 
 from math import *
 from itertools import *
 from functools import *
 from collections import *
+from os.path import *
