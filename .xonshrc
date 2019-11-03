@@ -8,7 +8,7 @@ $PYENV_ROOT = '~/.anyenv/envs/pyenv'
 $PATH = [
     '$PYENV_ROOT/shims',
     '$PYENV_ROOT/bin',
-    # '$HOME/.cargo/bin',
+    '$HOME/.cargo/bin',
     '/home/linuxbrew/.linuxbrew/bin',
     '/usr/local/bin',
     '/usr/bin',
