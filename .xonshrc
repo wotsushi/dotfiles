@@ -1,6 +1,7 @@
-from glob import glob
-for xsh in glob('~/.config/xonsh/'):
-    source @(xsh)
+from os.path import expanduser
+import sys
+sys.path.append(f'{expanduser("~")}/.config/xonsh')
+import envvar
 
 from prompt_toolkit.keys import Keys
 from prompt_toolkit.filters import Condition, EmacsInsertMode, ViInsertMode
