@@ -1,3 +1,5 @@
+from prompt_toolkit.keys import Keys
+
 @events.on_ptk_create
 def custom_keybindings(bindings, **kw):
     handler = bindings.add
