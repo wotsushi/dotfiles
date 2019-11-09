@@ -1,3 +1,5 @@
+import os
+
 def _peco_gitlog():
     commit_line = $(git log --oneline | peco)
     if commit_line:
@@ -16,3 +18,9 @@ def _peco_ghq():
     repository = $(ghq list -p | peco).strip()
     if repository:
         cd @(repository)
+
+
+def _mkdir_cd(name):
+    directory, *_ = name
+    os.makedirs(directory, exist_ok=True)
+    cd @(directory)
