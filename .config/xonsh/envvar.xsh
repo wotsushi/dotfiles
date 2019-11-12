@@ -3,6 +3,7 @@ $RIGHT_PROMPT = "{branch_color} {gitstatus}"
 $AUTO_PUSHD = True
 $AUTO_CD = True
 $DIRSTACK_SIZE = 100
+$HISTCONTROL = {'ignoredups', 'ignoreerr'}
 
 $PYENV_ROOT = '~/.anyenv/envs/pyenv'
 $PATH = [
