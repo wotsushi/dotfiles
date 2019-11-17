@@ -37,5 +37,5 @@ def _oj_test(args):
     shutil.rmtree(test_dir, ignore_errors=True)
     url = 'https://atcoder.jp/contests/{c}/tasks/{t}'.format(c=contest, t=task)
     oj d @(url) -d @(test_dir)
-    rustc @('{}.rs'.format(problem)) -o @('{}.out'.format(problem))
+    rustup run 1.15.1 rustc @('{}.rs'.format(problem)) -o @('{}.out'.format(problem))
     oj t -d @('test/{}'.format(problem)) -c @('./{}.out'.format(problem))
