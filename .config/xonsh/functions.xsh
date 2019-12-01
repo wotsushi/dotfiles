@@ -47,3 +47,16 @@ def _oj_test(args):
         oj t -d @('test/{}'.format(problem)) -c @('./{}.out'.format(problem)) -e @(error)
     else:
         oj t -d @('test/{}'.format(problem)) -c @('./{}.out'.format(problem))
+
+
+def _bcd_cd():
+    import json
+    with open(expanduser('~/.config/bcd/fav.json')) as favs:
+        favs = json.load(favs)
+    directories = []
+    for fav in favs:
+        directories.append($(fd . @(expanduser(fav)) -t d))
+    directory_line = $(echo @('\n'.join(directories)) | peco)
+    if directory_line:
+        directory, *_ = directory_line.split(':', maxsplit=1)
+        cd @(directory.strip())
