@@ -55,6 +55,7 @@ def _bcd_cd():
         favs = json.load(favs)
     directories = []
     for fav in favs:
+        directories.append(fav)
         directories.append($(fd . @(expanduser(fav)) -t d))
     directory_line = $(echo @('\n'.join(directories)) | peco)
     if directory_line:
