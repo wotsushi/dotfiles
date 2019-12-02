@@ -1,5 +1,6 @@
 import os
 import shutil
+import json
 
 def _peco_gitlog():
     commit_line = $(git log --oneline | peco)
@@ -50,7 +51,6 @@ def _oj_test(args):
 
 
 def _bcd_cd():
-    import json
     with open(expanduser('~/.config/bcd/fav.json')) as favs:
         favs = json.load(favs)
     directories = []
@@ -60,3 +60,19 @@ def _bcd_cd():
     if directory_line:
         directory, *_ = directory_line.split(':', maxsplit=1)
         cd @(directory.strip())
+
+
+def _bcd_bookmark():
+    with open(expanduser('~/.config/bcd/fav.json')) as favs:
+        favs = json.load(favs)
+    favs.append($(pwd).strip())
+    with open(expanduser('~/.config/bcd/fav.json'), 'w') as favs_sink:
+        json.dump(favs, favs_sink)
+
+
+def _bcd(args):
+    if len(args) == 0:
+        _bcd_cd()
+    elif len(args) == 1:
+        if args[0] == 'b':
+            _bcd_bookmark()
