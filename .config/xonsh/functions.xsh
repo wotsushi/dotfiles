@@ -77,11 +77,21 @@ def _bcd_list():
     print('\n'.join(f'{i:02} {fav}'for i, fav in enumerate(favs)))
 
 
+def _bcd_remove(i):
+    with open(expanduser('~/.config/bcd/fav.json')) as favs:
+        favs = json.load(favs)
+    favs.pop(i)
+    with open(expanduser('~/.config/bcd/fav.json'), 'w') as favs_sink:
+        json.dump(favs, favs_sink)
+
+
 def _bcd(args):
     if len(args) == 0:
         _bcd_cd()
-    elif len(args) == 1:
+    else:
         if args[0] == 'b':
             _bcd_bookmark()
         if args[0] == 'l':
             _bcd_list()
+        if args[0] == 'r':
+            _bcd_remove(int(args[1]))
