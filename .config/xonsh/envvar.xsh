@@ -7,9 +7,12 @@ $HISTCONTROL = {'ignoredups', 'ignoreerr'}
 $UPDATE_COMPLETIONS_ON_KEYPRESS = True
 
 $PYENV_ROOT = '~/.anyenv/envs/pyenv'
+$GOENV_ROOT = '~/.anyenv/envs/goenv'
 $PATH = [
     '$PYENV_ROOT/shims',
     '$PYENV_ROOT/bin',
+    '$GOENV_ROOT/bin',
+    '~/.goenv/shims',
     '$HOME/.cargo/bin',
     '/home/linuxbrew/.linuxbrew/bin',
     '/usr/local/bin',
@@ -17,3 +20,5 @@ $PATH = [
     '/bin',
     '/sbin'
 ]
+
+$GOPATH = '$HOME/go'
