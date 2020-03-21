@@ -2,16 +2,16 @@ import os
 from pathlib import Path
 
 repo = Path(os.path.abspath(__file__)).parent.parent
-print(repo)
 home = Path.home()
 dotfiles = [
-    'Brewfile',
-    '.bash_profile',
-    '.gitconfig',
-    'com.googlecode.iterm2.plist',
-    '.emacs.d',
-    '.config/peco',
-    '.config/xonsh'
+    "Brewfile",
+    ".bash_profile",
+    ".gitconfig",
+    "com.googlecode.iterm2.plist",
+    ".emacs.d",
+    ".config/peco",
+    ".config/xonsh",
+    ".config/karabiner/karabiner.json",
 ]
 
 for dotfile in dotfiles:
