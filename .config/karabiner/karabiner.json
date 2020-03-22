@@ -2025,7 +2025,7 @@
                         ]
                     },
                     {
-                        "description": "[Emacs Mode] Control+[ to Escape",
+                        "description": "[Emacs Mode] Control+G to Escape",
                         "manipulators": [
                             {
                                 "conditions": [
@@ -2075,7 +2075,7 @@
                                     }
                                 ],
                                 "from": {
-                                    "key_code": "open_bracket",
+                                    "key_code": "g",
                                     "modifiers": {
                                         "mandatory": [
                                             "control"
