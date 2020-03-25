@@ -4,6 +4,7 @@ $AUTO_PUSHD = True
 $AUTO_CD = True
 $DIRSTACK_SIZE = 100
 $HISTCONTROL = {'ignoredups', 'ignoreerr'}
+$XONSH_HISTORY_SIZE = (1024, 'commands')
 $UPDATE_COMPLETIONS_ON_KEYPRESS = True
 
 $PYENV_ROOT = '~/.anyenv/envs/pyenv'
